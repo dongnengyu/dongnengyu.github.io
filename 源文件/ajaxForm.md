@@ -5,7 +5,7 @@ title: ajaxForm 使用
 
 面临问题：form表单submit之后，后端会返回提示信息。但原生html无法获取后端返回的数据，就造成了这样一种局面：提交之后，页面发生跳转，在一个空白页面上显示了后端返回的json数据，用户体验0分。
 
-```
+```javascript
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
