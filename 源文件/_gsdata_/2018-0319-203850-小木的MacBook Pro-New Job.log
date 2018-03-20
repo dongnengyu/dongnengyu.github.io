@@ -1,0 +1,10 @@
+2018-03-19 20:38:50: -- Analysis Started by User Command
+2018-03-19 20:38:50: Name '数据库错误：Parameter index out of range (1 > number of parameters, which is 0).md' in path '' contains illegal characters, using name '数据库错误：Parameter index out of range (1 _ number of parameters, which is 0).md' instead
+2018-03-19 20:38:50: Changes: 1, Conflicts: 0, CopyTime: 0, FixState: 0, Errors: 0, All: 171
+2018-03-19 20:38:50: Left to Right: Copy File: 1 
+2018-03-19 20:38:50: -- Analysis Complete. Time 00:00:00, Speed: Many files/s
+2018-03-19 20:38:50: 
+2018-03-19 20:38:51: == Sync Started by User Command
+2018-03-19 20:38:51: Copy New '/Users/xiaomu/Documents/MyBlog/source/_posts/数据库错误：Parameter index out of range (1 > number of parameters, which is 0).md' -> '/Users/xiaomu/Documents/MyBlog/public/源文件/数据库错误：Parameter index out of range (1 _ number of parameters, which is 0).md'
+2018-03-19 20:38:51: == Sync Complete. Time: 00:00:00, Speed: 0.0/s, OK: 1, Errors: 0
+2018-03-19 20:38:51: 
