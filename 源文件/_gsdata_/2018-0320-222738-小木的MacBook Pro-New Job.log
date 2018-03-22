@@ -1,7 +1,0 @@
-2018-03-20 22:27:39: -- Analysis Started by On File Change Incremental
-2018-03-20 22:27:39: Changes: 1, Conflicts: 0, CopyTime: 0, FixState: 0, Errors: 0, All: 173
-2018-03-20 22:27:39: Left to Right: Copy File: 1 
-2018-03-20 22:27:39: == Sync Started by On File Change Incremental
-2018-03-20 22:27:39: Copy Over '/Users/xiaomu/Documents/MyBlog/source/_posts/5个经典的同步问题.md' -> '/Users/xiaomu/Documents/MyBlog/public/源文件/5个经典的同步问题.md'
-2018-03-20 22:27:39: == Sync Complete. Time: 00:00:00, Speed: 0.0/s, OK: 1, Errors: 0
-2018-03-20 22:27:39: 

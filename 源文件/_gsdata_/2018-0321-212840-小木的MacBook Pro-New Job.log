@@ -1,0 +1,7 @@
+2018-03-21 21:28:41: -- Analysis Started by On File Change Incremental
+2018-03-21 21:28:41: Changes: 1, Conflicts: 0, CopyTime: 0, FixState: 0, Errors: 0, All: 174
+2018-03-21 21:28:41: Left to Right: Delete File: 1 
+2018-03-21 21:28:41: == Sync Started by On File Change Incremental
+2018-03-21 21:28:41: Delete File '/Users/xiaomu/Documents/MyBlog/public/源文件/NewFile.txt'
+2018-03-21 21:28:41: == Sync Complete. Time: 00:00:00, Speed: 0.0/s, OK: 1, Errors: 0
+2018-03-21 21:28:41: 
