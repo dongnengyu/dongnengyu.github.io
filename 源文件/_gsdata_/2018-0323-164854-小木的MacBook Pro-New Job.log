@@ -1,0 +1,7 @@
+2018-03-23 16:48:55: -- Analysis Started by On File Change Incremental
+2018-03-23 16:48:55: Changes: 1, Conflicts: 0, CopyTime: 0, FixState: 0, Errors: 0, All: 176
+2018-03-23 16:48:55: Left to Right: Copy File: 1 
+2018-03-23 16:48:55: == Sync Started by On File Change Incremental
+2018-03-23 16:48:55: Copy Over '/Users/xiaomu/Documents/MyBlog/source/_posts/泛型.md' -> '/Users/xiaomu/Documents/MyBlog/public/源文件/泛型.md'
+2018-03-23 16:48:55: == Sync Complete. Time: 00:00:00, Speed: 0.0/s, OK: 1, Errors: 0
+2018-03-23 16:48:55: 
