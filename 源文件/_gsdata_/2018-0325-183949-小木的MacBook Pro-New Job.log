@@ -1,0 +1,7 @@
+2018-03-25 18:39:50: -- Analysis Started by On File Change Incremental
+2018-03-25 18:39:50: Changes: 1, Conflicts: 0, CopyTime: 0, FixState: 0, Errors: 0, All: 177
+2018-03-25 18:39:50: Left to Right: Copy File: 1 
+2018-03-25 18:39:50: == Sync Started by On File Change Incremental
+2018-03-25 18:39:50: Copy Over '/Users/xiaomu/Documents/MyBlog/source/_posts/将javaBean对象转化成Map.md' -> '/Users/xiaomu/Documents/MyBlog/public/源文件/将javaBean对象转化成Map.md'
+2018-03-25 18:39:50: == Sync Complete. Time: 00:00:00, Speed: 0.0/s, OK: 1, Errors: 0
+2018-03-25 18:39:50: 
