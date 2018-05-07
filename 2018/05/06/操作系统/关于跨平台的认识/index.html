@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="C为什么不能跨平台咱们先来讨论一下，C语言的执行过程，从而搞清楚为什么C语言不能跨平台。 12345678//@author www.yaoxiaowen.com    转载文章请注明出处。// 本文地址：http://www.cnblogs.com/yaoxiaowen/p/7470460.html  #include &amp;lt;stdio.h&amp;gt;int main()&amp;#123;    pri">
+<meta property="og:type" content="article">
+<meta property="og:title" content="做只猫">
+<meta property="og:url" content="http://yoursite.com/2018/05/06/操作系统/关于跨平台的认识/index.html">
+<meta property="og:site_name" content="做只猫">
+<meta property="og:description" content="C为什么不能跨平台咱们先来讨论一下，C语言的执行过程，从而搞清楚为什么C语言不能跨平台。 12345678//@author www.yaoxiaowen.com    转载文章请注明出处。// 本文地址：http://www.cnblogs.com/yaoxiaowen/p/7470460.html  #include &amp;lt;stdio.h&amp;gt;int main()&amp;#123;    pri">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/05/06/操作系统/关于跨平台的认识/media/15256030549199.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/05/06/操作系统/关于跨平台的认识/media/15256003015967.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/05/06/操作系统/关于跨平台的认识/media/15256003229532.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/05/06/操作系统/关于跨平台的认识/media/15256003422847.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/06/操作系统/关于跨平台的认识/media/15256028603189.jpg">
+<meta property="og:updated_time" content="2018-05-06T10:37:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="做只猫">
+<meta name="twitter:description" content="C为什么不能跨平台咱们先来讨论一下，C语言的执行过程，从而搞清楚为什么C语言不能跨平台。 12345678//@author www.yaoxiaowen.com    转载文章请注明出处。// 本文地址：http://www.cnblogs.com/yaoxiaowen/p/7470460.html  #include &amp;lt;stdio.h&amp;gt;int main()&amp;#123;    pri">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/06/操作系统/关于跨平台的认识/media/15256030549199.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/06/操作系统/关于跨平台的认识/"/>
+
+
+
+
+
+  <title> | 做只猫</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">做只猫</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">董能宇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/06/操作系统/关于跨平台的认识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="董能宇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="做只猫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-06T18:37:36+08:00">
+                2018-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="C为什么不能跨平台"><a href="#C为什么不能跨平台" class="headerlink" title="C为什么不能跨平台"></a>C为什么不能跨平台</h1><p>咱们先来讨论一下，C语言的执行过程，从而搞清楚为什么C语言不能跨平台。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//@author www.yaoxiaowen.com    转载文章请注明出处。</span></span><br><span class="line"><span class="comment">// 本文地址：http://www.cnblogs.com/yaoxiaowen/p/7470460.html  </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Hello, World!"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们知道，计算机只认识0和1(就是二进制)，换句话说，不管我们在计算机上干了什么事情，运行了多么复杂的程序，从ps绘图，到qq聊天，再到听音乐，最终到了CPU的执行层面，其实就是 一串串的0和1组成的指令罢了。 当然，到了硬件层面，那就是与或非门的领域了。但是，上面的那个 hello world程序是怎么转换为0和1的呢。<br>一般情况下，对于我们使用的是 IDE，比如 Visual Studio， CodeBlocks之类的，就是点击个运行按钮那么简单，或者你就是使用了gcc命令行来进行编译，也可以一行命令 gcc -o hello hello.c,就 输出了最后的编译结果。但是实际上，hello world的编译过程是这样的:<br><img src="media/15256030549199.jpg" alt=""></p>
+<p>我们分阶段来讨论:</p>
+<p>预处理阶段。预处理器(cpp)来把 代码中#开头的行进行展开， 比如头文件，宏等内容，修改最初的C文件。<br>编译阶段。编译器(ccl)将修改后的C文件，翻译成了 另一文本文件，hello.s，这就是我们所说的汇编程序了。 打开这个文本文件内容 类似下面的格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//@author www.yaoxiaowen.com    转载文章请注明出处。</span><br><span class="line">// 本文地址：http://www.cnblogs.com/yaoxiaowen/p/7470460.html  </span><br><span class="line">     section .data</span><br><span class="line"> msg     db      &apos;Hello, world!&apos;,0xA</span><br><span class="line"> len     equ     $-msg</span><br><span class="line"> </span><br><span class="line">     section .text</span><br><span class="line"> global  _start</span><br><span class="line"> _start:</span><br><span class="line">         mov     edx,len</span><br><span class="line">         mov     ecx,msg</span><br><span class="line">         mov     ebx,1</span><br><span class="line">         mov     eax,4</span><br><span class="line">         int     0x80</span><br><span class="line"> </span><br><span class="line">         mov     ebx,0</span><br><span class="line">         mov     eax,1</span><br><span class="line">         int     0x80</span><br></pre></td></tr></table></figure>
+<p>当然，不同CPU和平台环境，编译输出的汇编代码也不同，我们这里仅作为示例。</p>
+<p>汇编阶段。汇编器(as)将hello.s翻译成机器语言指令。 把这些命令打包成一种叫做可重定位目标程序(relocatable object program)的格式，此时的输出格式就是hello.o了。这其实就是二进制文件了。<br>链接阶段。编译过程最后还有一个链接阶段(程序调用了 printf函数)，最后的输出结果还是和上一步类似，都是直接二进制文件。</p>
+<p>了解了 hello world程序的编译过程，我们就来讨论一下，什么是汇编程序。</p>
+<p>汇编语言（英语：assembly language）是一种用于电子计算机、微处理器、微控制器，或其他可编程器件的低级语言。在不同的设备中，汇编语言对应着不同的机器语言指令集。一种汇编语言专用于某种计算机系统结构，而不像许多高级语言，可以在不同系统平台之间移植。</p>
+<p>什么是汇编，相关专业的同学应该都明白，因为计算机只认识0和1(就是二进制)，所以在计算机刚开始发明时，那些科学家们就是直接 向计算机输入0和1，来运行计算任务的。(当然，他们是通过穿孔纸带的方式来向计算机输入, 比如有孔代表1，没孔代表0)。通过这样的方式，计算机终于能运行了，但是这样的效率实在太慢了。</p>
+<p>而在他们输入的0和1中，有些代表的是指令，这些是有固定含义和编码的。也是芯片能识别的。而另一些是数据。这些不同的程序的数据自然是不同的。我们前面就说，不管多么复杂的计算机操作，到了cpu级别都是0和1，数据虽然多变，但是 指令的数量是有限的。因为 指令是要被芯片固定识别的。芯片中要用 晶体管(最初是电子管)组成的与或非门组合来识别这些指令和数据。因为直接输入0和1,实在太繁琐了，所以他们就发明了汇编语言。来简化 程序的编写。</p>
+<p>比如 计算 1+1，两个数据1都使用 0x0001 来表示，而 加操作，放在cpu中，可以是 0xa90df(这个是胡乱写的),这个二进制代表的加操作能被计算机识别。而因为这个加操作对于cpu来说，编码的0xa90df格式是固定的。所以可以直接一个助记符add来表示，这样科学家们写程序就方便多了，而这就是汇编程序的由来。因为汇编程序完成之后，可以再有一个专门的程序（就是要上文中所说的汇编器）来把编写的汇编程序编译成0和1.这样计算机也可以识别了，而汇编语言本身也方便了程序的编写和阅读。</p>
+<p>编写汇编比直接编写二进制方便高效了太多。但是 随着计算任务的复杂，程序的规模越来越庞大，使用汇编程序也很累啊，那么是否有更简单的方式呢？所以科学家们发明了高级语言(比如 C,lisp等)，在编写程序的时候，使用C语言等编写，然后再使用 编译器将C语言程序翻译成汇编程序，汇编程序再使用汇编器编译成0和1，这样，cpu能识别的东西没有变化，但是对于编写程序的人，确实方便了很多。</p>
+<p>通过以上的描述，我们就知道了高级语言的大概由来。也明白了我们所编写的各种高级语言，到了最后，其实都是转化为二进制执行。</p>
+<p>而直接二进制格式的程序，我们称之为本地机器码(native code)。而类似那些 add之类的 助记符，以及汇编的编写格式或标准，我们称之为 指令集。</p>
+<p>但是问题的关键来了。不同公司所生产的 cpu芯片。他们所使用的指令集不同啊, 这种芯片设计的事情，又不像TCP/IP协议那样，有国际统一的标准，甚至像intel所代表的复杂指令集，和arm为代表的精简指令集，它们指令集的设计思路就是不一样的。</p>
+<p>所以 我们C语言最后编译出来的的二进制文件，假设是这段93034030930900090222ab2d11cd22dfad(随便写的)，不同的cpu上识别的意义是不同的。</p>
+<p>所以为什么说C语言不能实现跨平台运行，就是因为它编译出来的 输出文件的格式，只适用于某种cpu，其他cpu不认识啊。</p>
+<p>我们所说的跨平台运行，并不是指hell.c这个文本文件的运行。因为文本文件本身也没办法运行。运行的只是它的编译结果hello，而这个由0和1组成的编译结果，不同的cpu和平台，他们的格式不同。所以C语言编译出来的结果，没办法跨平台运行。<br>甚至在不同的平台下，hello.c最后所编译出来的文件的格式都不同。比如linux下编译出的hello,window下编译结果是hello.exe,而mac下编译结果是hello.out,(至于单片机上编译结果的后缀是啥子，这个忘记了)。<br>也有些人会讲，为了让linux下编写的一段hello程序运行在window上，我不拿最后的编译结果hello来直接运行，我在window环境下重新用IDE建立项目，同样的源代码在window下重新运行一遍，输出hello.exe，再在window上运行，行不行啊？这个答案是No。因为不同环境下，c语言的标准有差别。例如 int类型，在有的平台上 可能16位表示，而有的平台上则是32位表示。所以不同环境下的同一个程序，会存在数据溢出之类的错误。<br>其实还有一点，大家平时写个程序，IDE上点击个run/build之类的，稍等一会就输出结果了，但是实际上，很多大型程序的编译过程是比较长的，比如我第一家公司做手机系统的，编译一个Android5.0的系统rom，在i7 cpu，16G内存的电脑上，需要编译运行一个多小时，才能编译成功输出最后的结果。<br>知道了 C语言不能跨平台运行，那有没有一种办法，能够 让高级语言实现跨平台的运行呢?</p>
+<p>思考实际编程中的一个场景，我们前端需要处理的某个数据是A格式，但是后台只能提供B格式的数据，那我们怎么办?很简单啊。写个接口，把B格式转化为A格式不就行了嘛。这就是设计模式当中的适配器设计模式。</p>
+<p>关于跨平台也是一样的道理。cpu的指令集不同， 不同平台编译出来的结果格式都不同，那么我们可以在各个平台上运行虚拟机，然后我们制定某种编译结果的输出格式，我们的输出了某种格式的结果，直接在虚拟机上运行。这样不就ok了嘛。。</p>
+<p>这其实就是 java采取的方式。</p>
+<p>Class文件格式，虚拟机以及 ByteCode<br>这是java版本的helloJava;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//@author www.yaoxiaowen.com    转载文章请注明出处。</span></span><br><span class="line"><span class="comment">// 本文地址：http://www.cnblogs.com/yaoxiaowen/p/7470460.html  </span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"helloJava"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段java程序编译出来的结果是 helloJava.class,换句话说，它输出的结果是Class文件格式(也叫字节码存储格式)。<br>class文件的内容大概就像下面那样：<br><img src="media/15256003015967.jpg" alt=""></p>
+<p>是不是看不懂?看不懂就对了。这其实就是java虚拟机定义的二进制格式，这种我们称之为 字节码(ByteCode),是java虚拟机所能运行的格式。类似本地机器码可以反编译成汇编，这种二进制也可以反编译成更容易阅读的格式。</p>
+<p>类似下面这样。<br><img src="media/15256003229532.jpg" alt=""></p>
+<p>而各个平台的java虚拟机 是不同的。但是我们编写的java程序 统一编译成特定格式的 Class文件格式，然后Class文件可以在各个不同平台的java虚拟机上运行,当然运行结果肯定也是一致的，至于各个不同平台之间的差异，这是那些编写java虚拟机的人去考虑的事情，我们这些做java的程序员，不用去关心这个问题。</p>
+<p>通过这种方式，我们的java程序就实现了跨平台。</p>
+<p>所以java也被称为 中间件技术语言。意思就是 中间加一层过度。很好理解。（当然，维基百科上对中间件技术的解释，基本把我看晕了,也和java没关系，不过大家理解这个意思就好）。</p>
+<p>平台无关性<br>而通过java虚拟机和Class文件格式，我们就实现了平台无关性,换句话说，这些适应各个不同平台和cpu的工作的还是要有人干的。那就是设计java虚拟机的人去做这些工作，但是他们的辛苦换来了我们上层程序员的轻松。我们就完全不关心各个平台和cpu的差异了。</p>
+<p>代码编译的结果，从本地机器码（NativeCode）向字节码(ByteCode)的转变，是存储格式的一小步，却是编程语言发展的一大步</p>
+<p>虽然说名字是 ByteCode,但是我觉的，其实和 NaticeCode 都差不多，反正都是定义了一套指令集，只是前者能被虚拟机执行引擎去执行，而 后者能被物理机的CPU去执行罢了。</p>
+<p>知道了大概的原理，我们就思考另一个问题，java虚拟机去执行Class文件，那和java的源文件 有什么关系呢。答案是 没关系。换句话说，java的源文件编译的输出结果为Class文件，而Class文件能被java虚拟机认识，并执行，这是两个独立的过程，中间也没啥关系和必然性。</p>
+<p>那么进而引申出另一个问题，某一种其他编程语言，如果我设计出了一种对应的编译器，将其编译输出结果为Class文件，那这样该语言岂不是也实现了跨平台了?</p>
+<p>想到这一点，那么恭喜你，你发现了 java虚拟机的另一种 重要特性。语言无关性</p>
+<p>语言无关性<br>java虚拟机在执行Class文件时，不知道也完全不关心这个Class文件是咋来的。(这个Class文件可以是任何一种语言的源文件编译而来，当然，就像直接编写汇编一样，你直接编写 ByteCode也行,只要格式正确)。<br>其实CPU在执行二进制的指令时，它不知道也完全不关心这些指令流是咋来的。这都是同一个道理。</p>
+<p>很多程序员都还认为Java虚拟机执行Java程序是一件理所当然和天经地义的事情。这是错误的。</p>
+<p>下面某些内容 援引 周志明的 《深入理解java虚拟机》：</p>
+<p>Sun的开发设计团队在最初设计的时候就把Java的规范拆分成了Java语言规范《The Java Language Specification》及Java虚拟机规范《The Java Virtual Machine Specification》。</p>
+<p>并且在1997年发布的第一版Java虚拟机规范中就曾经承诺过：“In the future,we will consider bounded extensions to the Java virtual machine to provide better support for other languages”（在未来，我们会对Java虚拟机进行适当的扩展，以便更好地支持其他语言运行于JVM之上）。</p>
+<p><img src="media/15256003422847.png" alt=""><br>实现语言无关性的基础仍然是虚拟机和字节码存储格式。Java虚拟机不和包括Java在内的任何语言绑定，它只与“Class文件”这种特定的二进制文件格式所关联，Class文件中包含了Java虚拟机指令集和符号表以及若干其他辅助信息。基于安全方面的考虑，Java虚拟机规范要求在Class文件中使用许多强制性的语法和结构化约束，但任何一门功能性语言都可以表示为一个能被Java虚拟机所接受的有效的Class文件。作为一个通用、机器无关的执行平台，任何其他语言的实现者都可以将Java虚拟机作为语言的产品交付媒介。</p>
+<p>换句话说，java虚拟机这个名字其实只是一个误导，java虚拟机和java没啥关系，其实更应该叫做 Class文件虚拟机。</p>
+<p>因为其他语言， 只要有对应的编译器，输出结果就可以运行在java虚拟机上，所以时至今日,涌现Clojure、Groovy、JRuby、Jython、Scala一批运行在java虚拟机上的语言。</p>
+<p>目前下图中的语言都已经可以运行在java虚拟机上。<br><img src="media/15256028603189.jpg" alt=""></p>
+<p>所以广义上的java技术体系，也包括Clojure、JRuby、Groovy,Scale等运行于Java虚拟机上的语言及其相关的程序。</p>
+<p>Java,Scale等各种语言中的各种变量、关键字和运算符号的语义最终都是由多条字节码命令组合而成的，因此字节码命令所能提供的语义描述能力肯定会比单一语言本身更加强大。</p>
+<p>当然，在java最初刚出现的时候，Write Once，Run Anywhere, 这种 平台无关性被吹嘘的比较厉害，但是现在 这种虚拟机的思想，被很多其他语言也学会了，比如python和pvm。go语言，.NET等都是同样的思想。</p>
+<p>为什么C/C++没有被替代。<br>关于java虚拟机和Class文件格式， 貌似很厉害的样子，什么 个人一小步，人类一大步都扯上了，那肯定有人疑问，为什么 c/c++这些不能跨平台的语言，还现在还被很多人使用，还没被java取代呢。</p>
+<p>当然，这个原因有很多，比如java的gc过程所无法避免的stop the world过程，这在 某些实时性要求比较高的 系统中，比如 股票交易系统，军事系统，是不可接受的。(关于垃圾回收这是另一个话题，不在本文范围内，未来有时间可以花时间另写博客讨论这个问题)。</p>
+<p>不过有句话说的很好<br>java和c++之间有一堵由动态内存分配和垃圾收集技术所围成的’高墙’，墙外的人想进去，墙内的人想出来</p>
+<p>另外，对于直接与硬件交互的事情，也只能靠C语言了。毕竟上层再怎么发展，硬件与系统之间永远要存在一个驱动层啊。</p>
+<p>但是除了以上这些，还有一个原因。给大家讲讲软件历史上的一个重大教训，大家也许就明白了。</p>
+<p>当年为了对抗sun的java平台，微软2002年推出了类似中间件思想的.NET平台(C#)。当时window xp一统江湖，让微软如日中天，不可一世，微软在下一代操作系统(就是window visa)的开发中，决定使用 C#， 虽然微软牛逼哄哄，拥有最牛逼的程序员，最顶尖的科学家，但是开发到最后他们发现，使用C#这种运行在虚拟机上的中间件语言，无论如何也达不到 C/C++语言的速度。所以最后悲剧的 window visa，全部推倒重来，重新开发。当时李开复在微软，他的一本书中对此有详细介绍。</p>
+<p>当然，当年window visa项目的失败，还有其他一些原因，比如 使用数据库系统代替文件系统，驱动不兼容等， 但是 使用.NET来进行开发，起码也是失败的主要原因之一。</p>
+<p>所以现在大家明白了，ByteCode运行在虚拟机上，相比于直接编译成 NativeCode 运行在物理机上，速度较慢。</p>
+<p>现在随着虚拟机运行时优化技术的发展，以及硬件的速度越来越快，所以它们速度之间的差异，也没之前差距那么大了。</p>
+<p>实质上，Class文件在虚拟机上运行的时候，还会有很多的优化措施。</p>
+<p>在部分的商用虚拟机中，Java程序最初是通过解释器（Interpreter）进行解释执行的，当虚拟机发现某个方法或代码块的运行特别频繁时，就会把这些代码认定为“热点代码”（Hot Spot Code）。为了提高热点代码的执行效率，在运行时，虚拟机将会把这些代码编译成与本地平台相关的机器码，并进行各种层次的优化，完成这个任务的编译器称为即时编译器（Just In Time Compiler，简称JIT编译器）。</p>
+<p>许多主流的商用虚拟机都同时包含解释器与编译器。解释器与编译器两者各有优势：当程序需要迅速启动和执行的时候，解释器可以首先发挥作用，省去编译的时间，立即执行。在程序运行后，随着时间的推移，编译器逐渐发挥作用，把越来越多的代码编译成本地代码之后，可以获取更高的执行效率。当程序运行环境中内存资源限制较大（如部分嵌入式系统中），可以使用解释执行节约内存，反之可以使用编译执行来提升效率。</p>
+<p>但是实际上，编译器可以把java源文件的输出结果编译成Class格式(也就是 ByteCode)，那自然也可以有其他类型的编译器 可以直接将java源文件编译为NativeCode啊。所以对于编程语言来说，我们可以有各种方式来编译它，Java语言的“编译期”其实是一段“不确定”的操作过程。因为我们可以使用不同类型的编译器编译出不同的输出结果。</p>
+<p>java常见的编译器有以下类型。</p>
+<p>前端编译器：把.java文件转变成.class文件。比如Sun的Javac、Eclipse JDT中的增量式编译器（ECJ）。<br>JIT编译器：字节码(ByteCode)转变成机器码(NaticeCode)。比如HotSpot VM的C1、C2编译器。<br>AOT编译器：直接把*.java文件编译成本地机器代码。 比如GNU Compiler for the Java（GCJ）、Excelsior JET。<br>结束<br>所以讨论到最后，大家就已经明白，所以平台无关性，与 编译器与编译输出结果格式 的关系。花了一天时间写了这么多内容，也希望给大家带来一些启发。</p>
+<p>在本篇博客当中，很多内容也并不是精确的分析，比如某些概念，都说的比较模糊，因为我们这片博客只是讨论思想。很多概念和过程也都没有去深究, 如有错误不准确的地方，欢迎指正。</p>
+<p>补充内容（20170905）<br>非常感谢大家对这篇文章的支持，能够对其他人有所帮助，获得大家的认可。更加提升了我坚持写博客的动力。</p>
+<p>针对评论中的问题，也进行一些解答。</p>
+<p>一</p>
+<p>如文章末尾所说，我本来就是写大概思想，所以很多细节没有深入去追究，其实比如像汇编的格式，指令集的执行等，其实这些讨论起来真心复杂，牵扯到cpu的结构设计等。今后也计划写文章和大家讨论这些问题。</p>
+<p>评论中倒没有人指出这方面的问题，不过我大学时本来就是做C语言和单片机的，明白这方面介绍的依旧不够准确和详细。（当然，很多细节我也忘记了）</p>
+<p>二</p>
+<p>评论当中有人提到.NET的虚拟机的问题，首先因为我本身是Android程序员，大学时期也做过C语言，单片机等，所以对java，C等算是了解一些，但是对.NET的确不了解。对.NET有限的知识，也来源于和做.NET的朋友的讨论交流。因此关于.NET思想的评价可能不够准确。</p>
+<p>评论中有人提出了以下问题：</p>
+<p>wdwwtzy 评论： 那我想问问，.net 也是 java 一样的虚拟机技术，为什么早期.net 无法跨平台？<br>隆德尔评论：楼主，据我所知，java与.net，此虚拟机非彼虚拟机。而且这个问题一直被很多javaer所混淆。<br>wdwwtzy评论：啥意思，看文章的意思，java 一出生不就是真正的跨平台了吗？</p>
+<p>有些同学直接评论做了相关解答，对此深表感谢。写博客本来就是一个相互讨论相互促进的过程，所以感谢各位的解答。</p>
+<p>WindyAmy评论：.net CLR/.net framework 和window系统结合的太紧密导致。现在微软重写了部分framework库（.net core），已经可以实现夸平台了。<br>Blackheart评论：因为没有人在其他平台实现.net 的clr啊，后来有了mono，可以跨平台了。没有真正意义上的跨平台，对于开发者而已，可能你不需要关心操作系统是windows还是linux了，你感觉是跨平台了。但是底层总有这么一帮人在帮你搭建支撑“跨平台”的基础设施的，对于他们来说，一个个的平台都需要单独去实现的。**</p>
+<p>几位解答的同学说的都已经非常好了，本人结合评论，也google了一些相关知识。再对.NET的相关问题写出我的理解。以期抛砖引玉。</p>
+<p>可以确定是，.NET和java虚拟机也是一样的思想，都是引入中间层/虚拟机的思想。做java的同学说java虚拟机（JVM），而微软的.NET的虚拟机的名称叫做通用语言运行平台（Common Language Runtime，简称CLR）。虽然有些同学可能认为CLR不叫虚拟机，但是归根到底，它还是广义的虚拟机的概念和思想。</p>
+<p>Clojure、Groovy、JRuby、Jython、Scala等很多语言都可以运行在JVM上。而 CLR也是一样的，C#、F#、VB.NET、C++、Python等几十种语言也可以运行在CLR上。</p>
+<p>java，Scala等编译结果为ByteCode(字节码),被称之为Class文件格式运行在jvm上，而jvm在运行Class格式文件时，可以解释运行，也可以通过JIT编译器编译成NativeCode加快运行。而C#，C++等编译成 通用中间语言（Common Intermediate Language，简称CIL）,然后再汇编成字节码，（当然这个字节码肯定不会是Class文件格式，但是概念相同），而在运行时，也是翻译成本地机器码运行（但是CLR貌似没有解释运行，这点求相关同学解答，我估计应该也有类似javascript的解释运行方式，不过没查到相关资料）。</p>
+<p>以上是技术层面，下面我们再来讨论 一些非技术层面。</p>
+<p>大家知道，我们要想在某个平台上运行java开发的项目，必须要安装jdk，这个过程还是很麻烦的，要设置环境变量之类的。这对于普通用户来讲是不可能完成的操作。而.NET其实也是需要安装环境的（叫做 .NET framework），但是window就是微软自家的，所以window系统内置了.NET framewok。(win7自带.net3.5版本,win10自带4.0版本)，所以window上本来就可以运行.NET的程序。省去了普通用户安装.NET framework的麻烦。</p>
+<p>但是微软肯定不会为window内置jdk的，原因太简单了，如果window也都内置了jdk，而其他的linux，mac等操作系统也都进行内置，那么各个开发应用/游戏的厂商们，直接使用java开发就好了，然后开发出来的产品直接window/linux/mac所有系统平台上都通用，厂商们开心了，消费者也开心了，那这个时候，我们为什么还要使用window操作系统呢？反正对于普通消费者而言，使用应用或玩游戏都是没啥区别的。</p>
+<p>（所以这也是为什么java在pc端应用/游戏领域没人使用，而服务器端使用java的多，因为开发服务器的码农们搭配java环境很easy啊）</p>
+<p>回想一下 window与Netscape的浏览器大战，如果使用浏览器就能干大部分事情，那么大家根本就不关心运行浏览器的操作系统是window还是linux了。当然，现在互联网的流量/入口之争其实都是同一个道理。普通消费者哪里关心那么多，哪个好用，哪个便宜就用那个。</p>
+<p>2014年11月12日，微软宣布将完全开放.NET框架的源代码，并提供给Linux和OS X使用。</p>
+<p>首先本博客当中非常清晰的表达了这个观点，什么跨平台不跨平台，适应各个平台/CPU的差异，这种脏活累活永远也得有人干，只是那些 去做虚拟机的人干了这种活，我们这种纯粹写上层的人轻松了而已。</p>
+<p>所以我觉的很多时候，能不能跨平台，除了技术问题，还要有商业原因，甚至也有money的问题（毕竟开发各个平台的虚拟机也是不易）。就像 .NET理论上跨平台，但是不开源，几年前微软又不肯为.NET提供linux环境下的实现。那么自然没办法跨平台，但是这和技术无关。</p>
+<p>java最初设计时，理论上就可以跨平台，但是那些苦逼的虚拟机开发者们还要去开发各个平台/cpu的虚拟机，这也不是一朝一夕之功。</p>
+<p>微软现在可以让.NET跨平台，一来大的形势变了（之前的操作系统卖的那么贵，现在win10都可以免费了）,二来微软对.NET有控制权。而在java刚出来的时候，微软也支持java，也设计过微软版本的jvm。但是微软是想拥有对java技术体系的控制权，但是发现搞不过sun之类的，java不在它的控制之下，所以微软就开始搞自己的.NET平台了。</p>
+<p>也许Java程序员听起来可能会觉得惊讶，微软公司曾经是Java技术的铁杆支持者（也必须承认，与Sun公司争夺Java的控制权，令Java从跨平台技术变为绑定在Windows上的技术是微软公司的主要目的）。在Java语言诞生的初期，微软公司为了在IE3中支持Java Applets应用而开发了自己的Java虚拟机，虽然这款虚拟机只有Windows平台的版本，却是当时Windows下性能最好的Java虚拟机。但好景不长，在1997年10月，Sun公司正式以侵犯商标、不正当竞争等罪名控告微软公司，在随后对微软公司的垄断调查之中，这款虚拟机也曾作为证据之一被呈送法庭。这场官司的结果是微软公司赔偿2000万美金给Sun公司（最终微软公司因垄断赔偿给Sun公司的总金额高达10亿美元），承诺终止其Java虚拟机的发展，并逐步在产品中移除Java虚拟机相关功能。具有讽刺意味的是，到最后在Windows XP SP3中Java虚拟机被完全抹去的时候，Sun公司却又到处登报希望微软公司不要这样做。Windows XP高级产品经理Jim Cullinan称：“我们花费了3年的时间和Sun打官司，当时他们试图阻止我们在Windows中支持Java，现在我们这样做了，可他们又在抱怨，这太具有讽刺意味了。”</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/06/解释型语言和编译型语言的区别/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/07/java/sleep和wait的区别/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">董能宇</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C为什么不能跨平台"><span class="nav-number">1.</span> <span class="nav-text">C为什么不能跨平台</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">董能宇</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

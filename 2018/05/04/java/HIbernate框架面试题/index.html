@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="#  1、什么是Hibernate的并发机制？怎么去处理并发问题？Hibernate并发机制： a、Hibernate的Session对象是非线程安全的,对于单个请求,单个会话,单个的工作单元(即单个事务,单个线程),它通常只使用一次, 然后就丢弃。 123如果一个Session 实例允许共享的话，那些支持并发运行的,例如Http request,session beans将会导致出现资源争用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="做只猫">
+<meta property="og:url" content="http://yoursite.com/2018/05/04/java/HIbernate框架面试题/index.html">
+<meta property="og:site_name" content="做只猫">
+<meta property="og:description" content="#  1、什么是Hibernate的并发机制？怎么去处理并发问题？Hibernate并发机制： a、Hibernate的Session对象是非线程安全的,对于单个请求,单个会话,单个的工作单元(即单个事务,单个线程),它通常只使用一次, 然后就丢弃。 123如果一个Session 实例允许共享的话，那些支持并发运行的,例如Http request,session beans将会导致出现资源争用。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-04T09:01:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="做只猫">
+<meta name="twitter:description" content="#  1、什么是Hibernate的并发机制？怎么去处理并发问题？Hibernate并发机制： a、Hibernate的Session对象是非线程安全的,对于单个请求,单个会话,单个的工作单元(即单个事务,单个线程),它通常只使用一次, 然后就丢弃。 123如果一个Session 实例允许共享的话，那些支持并发运行的,例如Http request,session beans将会导致出现资源争用。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/04/java/HIbernate框架面试题/"/>
+
+
+
+
+
+  <title> | 做只猫</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">做只猫</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">董能宇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/04/java/HIbernate框架面试题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="董能宇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="做只猫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-04T17:01:42+08:00">
+                2018-05-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p># </p>
+<h5 id="1、什么是Hibernate的并发机制？怎么去处理并发问题？"><a href="#1、什么是Hibernate的并发机制？怎么去处理并发问题？" class="headerlink" title="1、什么是Hibernate的并发机制？怎么去处理并发问题？"></a>1、什么是Hibernate的并发机制？怎么去处理并发问题？</h5><p>Hibernate并发机制：</p>
+<p>a、Hibernate的Session对象是非线程安全的,对于单个请求,单个会话,单个的工作单元(即单个事务,单个线程),它通常只使用一次, 然后就丢弃。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">如果一个Session 实例允许共享的话，那些支持并发运行的,例如Http request,session beans将会导致出现资源争用。 </span><br><span class="line"></span><br><span class="line">如果在Http Session中有hibernate的Session的话,就可能会出现同步访问Http Session。只要用户足够快的点击浏览器的“刷新”,  就会导致两个并发运行的线程使用同一个Session。</span><br></pre></td></tr></table></figure>
+<p>b、多个事务并发访问同一块资源,可能会引发第一类丢失更新，脏读，幻读，不可重复读，第二类丢失更新一系列的问题。</p>
+<p>解决方案：设置事务隔离级别。<br>Serializable：串行化。隔离级别最高<br>Repeatable Read：可重复读<br>Read Committed：已提交数据读<br>Read Uncommitted：未提交数据读。隔离级别最差<br>设置锁：乐观锁和悲观锁。<br>乐观锁：使用版本号或时间戳来检测更新丢失,在的映射中设置 optimistic-lock=”all”可以在没有版本或者时间戳属性映射的情况下实现 版本检查，此时Hibernate将比较一行记录的每个字段的状态 行级悲观锁：Hibernate总是使用数据库的锁定机制，从不在内存中锁定对象！只要为JDBC连接指定一下隔 离级别，然后让数据库去搞定一切就够了。类LockMode 定义了Hibernate所需的不同的锁定级别：LockMode.UPGRADE,LockMode.UPGRADE_NOWAIT,LockMode.READ;</p>
+<h5 id="2、update和saveOrUpdate的区别？"><a href="#2、update和saveOrUpdate的区别？" class="headerlink" title="2、update和saveOrUpdate的区别？"></a>2、update和saveOrUpdate的区别？</h5><p>update()和saveOrUpdate()是用来对跨Session的PO进行状态管理的。<br>update()方法操作的对象必须是持久化了的对象。也就是说，如果此对象在数据库中不存在的话，就不能使用update()方法。<br>saveOrUpdate()方法操作的对象既可以使持久化了的，也可以使没有持久化的对象。如果是持久化了的对象调用saveOrUpdate()则会 更新数据库中的对象；如果是未持久化的对象使用此方法,则save到数据库中。</p>
+<h5 id="3、hibernate的三种状态之间如何转换"><a href="#3、hibernate的三种状态之间如何转换" class="headerlink" title="3、hibernate的三种状态之间如何转换"></a>3、hibernate的三种状态之间如何转换</h5><p>当对象由瞬时状态(Transient)一save()时，就变成了持久化状态；<br>当我们在Session里存储对象的时候，实际是在Session的Map里存了一份， 也就是它的缓存里放了一份，然后，又到数据库里存了一份，在缓存里这一份叫持久对象(Persistent)。 Session 一 Close()了,它的缓存也都关闭了,整个Session也就失效了,这个时候，这个对象变成了游离状态(Detached)，但数据库中还是存在的。<br>当游离状态(Detached)update()时，又变为了持久状态(Persistent)。<br>当持久状态(Persistent)delete()时，又变为了瞬时状态(Transient), 此时，数据库中没有与之对应的记录。</p>
+<h5 id="4、比较hibernate的三种检索策略优缺点"><a href="#4、比较hibernate的三种检索策略优缺点" class="headerlink" title="4、比较hibernate的三种检索策略优缺点"></a>4、比较hibernate的三种检索策略优缺点</h5><p>1立即检索；<br>优点： 对应用程序完全透明，不管对象处于持久化状态，还是游离状态，应用程序都可以方便的从一个对象导航到与它关联的对象；<br>缺点： 1.select语句太多；2.可能会加载应用程序不需要访问的对象白白浪费许多内存空间；<br>2延迟检索：<br>优点： 由应用程序决定需要加载哪些对象，可以避免可执行多余的select语句，以及避免加载应用程序不需要访问的对象。因此能提高检索性能，并且能节省内存空间；<br>缺点： 应用程序如果希望访问游离状态代理类实例，必须保证他在持久化状态时已经被初始化；<br>3 迫切左外连接检索<br>优点： 1对应用程序完全透明，不管对象处于持久化状态，还是游离状态，应用程序都可以方便地冲一个对象导航到与它关联的对象。2使用了外连接，select语句数目少；<br>缺点： 1 可能会加载应用程序不需要访问的对象，白白浪费许多内存空间；2复杂的数据库表连接也会影响检索性能；</p>
+<h5 id="5、如何在控制台看到hibernate生成并执行的sql"><a href="#5、如何在控制台看到hibernate生成并执行的sql" class="headerlink" title="5、如何在控制台看到hibernate生成并执行的sql"></a>5、如何在控制台看到hibernate生成并执行的sql</h5><p>在定义数据库和数据库属性的文件applicationConfig.xml里面，把hibernate.show_sql 设置为true<br>这样生成的SQL就会在控制台出现了<br>注意：这样做会加重系统的负担，不利于性能调优</p>
+<h5 id="6、hibernate都支持哪些缓存策略"><a href="#6、hibernate都支持哪些缓存策略" class="headerlink" title="6、hibernate都支持哪些缓存策略"></a>6、hibernate都支持哪些缓存策略</h5><p>Read-only: 这种策略适用于那些频繁读取却不会更新的数据，这是目前为止最简单和最有效的缓存策略 </p>
+<ul>
+<li>Read/write:这种策略适用于需要被更新的数据，比read-only更耗费资源，在非JTA环境下，每个事务需要在session.close和session.disconnect()被调用 </li>
+<li>Nonstrict read/write: 这种策略不保障两个同时进行的事务会修改同一块数据，这种策略适用于那些经常读取但是极少更新的数据 </li>
+<li>Transactional: 这种策略是完全事务化得缓存策略，可以用在JTA环境下</li>
+</ul>
+<h5 id="7、hibernate里面的sorted-collection-和ordered-collection有什么区别"><a href="#7、hibernate里面的sorted-collection-和ordered-collection有什么区别" class="headerlink" title="7、hibernate里面的sorted collection 和ordered collection有什么区别"></a>7、hibernate里面的sorted collection 和ordered collection有什么区别</h5><p>sorted collection是在内存中通过Java比较器进行排序的<br>ordered collection是在数据库中通过order by进行排序的</p>
+<h5 id="8、Hibernate工作原理？"><a href="#8、Hibernate工作原理？" class="headerlink" title="8、Hibernate工作原理？"></a>8、Hibernate工作原理？</h5><p>1.读取并解析配置文件<br>2.读取并解析映射信息，创建SessionFactory<br>3.打开Sesssion<br>4.创建事务Transation<br>5.持久化操作<br>6.提交事务<br>7.关闭Session<br>8.关闭SesstionFactory</p>
+<h5 id="9、为什么要用Hibernate"><a href="#9、为什么要用Hibernate" class="headerlink" title="9、为什么要用Hibernate"></a>9、为什么要用Hibernate</h5><ol>
+<li>对JDBC访问数据库的代码做了封装，大大简化了数据访问层繁琐的重复性代码。</li>
+</ol>
+<p>Hibernate是一个基于JDBC的主流持久化框架，是一个优秀的ORM实现。他很大程度的简化DAO层的编码工作</p>
+<p>hibernate使用Java反射机制，而不是字节码增强程序来实现透明性。</p>
+<p>hibernate的性能非常好，因为它是个轻量级框架。映射的灵活性很出色。它支持各种关系数据库，从一对一到多对多的各种复杂关系。</p>
+<h5 id="10、Hibernate是如何延迟加载"><a href="#10、Hibernate是如何延迟加载" class="headerlink" title="10、Hibernate是如何延迟加载?"></a>10、Hibernate是如何延迟加载?</h5><p>当Hibernate在查询数据的时候，数据并没有存在与内存中，当程序真正对数据的操作时，对象才存在与内存中，就实现了延迟加载，他节省了服务器的内存开销，从而提高了服务器的性能。</p>
+<h5 id="11、Hibernate中怎样实现类之间的关系-如：一对多、多对多的关系"><a href="#11、Hibernate中怎样实现类之间的关系-如：一对多、多对多的关系" class="headerlink" title="11、Hibernate中怎样实现类之间的关系?(如：一对多、多对多的关系)"></a>11、Hibernate中怎样实现类之间的关系?(如：一对多、多对多的关系)</h5><p>类与类之间的关系主要体现在表与表之间的关系进行操作，它们都是对对象进行操作，我们程序中把所有的表与类都映射在一起，它们通过配置文件中的many-to-one、one-to-many、many-to-many、</p>
+<h5 id="12、说下Hibernate的缓存机制"><a href="#12、说下Hibernate的缓存机制" class="headerlink" title="12、说下Hibernate的缓存机制"></a>12、说下Hibernate的缓存机制</h5><p>内部缓存存在Hibernate中又叫一级缓存，属于应用事物级缓存</p>
+<p>二级缓存：<br>a) 应用及缓存<br>b) 分布式缓存<br>条件：数据不会被第三方修改、数据大小在可接受范围、数据更新频率低、同一数据被系统频繁使用、非关键数据<br>c) 第三方缓存的实现</p>
+<h5 id="13、Hibernate的查询方式"><a href="#13、Hibernate的查询方式" class="headerlink" title="13、Hibernate的查询方式"></a>13、Hibernate的查询方式</h5><p>Sql、Criteria,objectcomposition<br>Hql：<br>1、 属性查询<br>2、 参数查询、命名参数查询<br>3、 关联查询<br>4、 分页查询<br>5、 统计函数</p>
+<h5 id="14、如何优化Hibernate？"><a href="#14、如何优化Hibernate？" class="headerlink" title="14、如何优化Hibernate？"></a>14、如何优化Hibernate？</h5><p>1.使用双向一对多关联，不使用单向一对多<br>2.灵活使用单向一对多关联<br>3.不用一对一，用多对一取代<br>4.配置对象缓存，不使用集合缓存<br>5.一对多集合使用Bag,多对多集合使用Set </p>
+<ol>
+<li>继承类使用显式多态 </li>
+<li>表字段要少，表关联不要怕多，有二级缓存撑腰</li>
+</ol>
+<h5 id="15、Hibernate有哪几种查询数据的方式"><a href="#15、Hibernate有哪几种查询数据的方式" class="headerlink" title="15、Hibernate有哪几种查询数据的方式"></a>15、Hibernate有哪几种查询数据的方式</h5><p>3种：hql、条件查询QBC(QueryBy Criteria)、原生sql （通过createSQLQuery建立）</p>
+<h5 id="16、谈谈Hibernate中inverse的作用"><a href="#16、谈谈Hibernate中inverse的作用" class="headerlink" title="16、谈谈Hibernate中inverse的作用"></a>16、谈谈Hibernate中inverse的作用</h5><p>inverse属性默认是false,就是说关系的两端都来维护关系。<br>比如Student和Teacher是多对多关系，用一个中间表TeacherStudent维护。Gp)i<br>如果Student这边inverse=”true”, 那么关系由另一端Teacher维护，就是说当插入Student时，不会操作TeacherStudent表（中间表）。只有Teacher插入或删除时才会触发对中间表的操作。所以两边都inverse=”true”是不对的，会导致任何操作都不触发对中间表的影响；当两边都inverse=”false”或默认时，会导致在中间表中插入两次关系。</p>
+<h5 id="17、Detached-Object（游离对象）有什么好处"><a href="#17、Detached-Object（游离对象）有什么好处" class="headerlink" title="17、Detached Object（游离对象）有什么好处"></a>17、Detached Object（游离对象）有什么好处</h5><p>Detached Object（游离对象）可以传递到任何层直到表现层而不是用任何DTO(DataTransfer Objects). 然后你还可以重新把游离对象赋给另外一个Session.</p>
+<h5 id="18、JDBC-hibernate-和-ibatis-的区别"><a href="#18、JDBC-hibernate-和-ibatis-的区别" class="headerlink" title="18、JDBC hibernate 和 ibatis 的区别"></a>18、JDBC hibernate 和 ibatis 的区别</h5><p>jdbc:手动<br>手动写sql<br>delete、insert、update要将对象的值一个一个取出传到sql中,不能直接传入一个对象。<br>select:返回的是一个resultset，要从ResultSet中一行一行、一个字段一个字段的取出，然后封装到一个对象中，不直接返回一个对象。<br>ibatis的特点:半自动化<br>sql要手动写<br>delete、insert、update:直接传入一个对象<br>select:直接返回一个对象<br>hibernate:全自动<br>不写sql,自动封装<br>delete、insert、update:直接传入一个对象<br>select:直接返回一个对象</p>
+<h5 id="19、在数据库中条件查询速度很慢的时候-如何优化"><a href="#19、在数据库中条件查询速度很慢的时候-如何优化" class="headerlink" title="19、在数据库中条件查询速度很慢的时候,如何优化?"></a>19、在数据库中条件查询速度很慢的时候,如何优化?</h5><p>1.建索引<br>2.减少表之间的关联<br>3.优化sql，尽量让sql很快定位数据，不要让sql做全表查询，应该走索引,把数据量大的表排在前面<br>4.简化查询字段，没用的字段不要，已经对返回结果的控制，尽量返回少量数据</p>
+<h5 id="20、什么是SessionFactory-她是线程安全么？"><a href="#20、什么是SessionFactory-她是线程安全么？" class="headerlink" title="20、什么是SessionFactory,她是线程安全么？"></a>20、什么是SessionFactory,她是线程安全么？</h5><p>SessionFactory 是Hibrenate单例数据存储和线程安全的，以至于可以多线程同时访问。一个SessionFactory 在启动的时候只能建立一次。SessionFactory应该包装各种单例以至于它能很简单的在一个应用代码中储存.</p>
+<h5 id="21、Hibernate的五个核心接口"><a href="#21、Hibernate的五个核心接口" class="headerlink" title="21、Hibernate的五个核心接口"></a>21、Hibernate的五个核心接口</h5><p>Configuration 接口：配置Hibernate，根据其启动hibernate，创建<br>SessionFactory 对象；<br>SessionFactory 接口：初始化Hibernate，充当数据存储源的代理，创建<br>session 对象，sessionFactory 是线程安全的，意味着它的同一个实例可以被应<br>用的多个线程共享，是重量级、二级缓存；<br>Session 接口：负责保存、更新、删除、加载和查询对象，是线程不安全的，<br>避免多个线程共享同一个session，是轻量级、一级缓存；<br>Transaction 接口：管理事务；<br>Query 和Criteria 接口：执行数据库的查询。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/04/数据库/数据库ACID/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/04/乐评/2018-05-04/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">董能宇</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、什么是Hibernate的并发机制？怎么去处理并发问题？"><span class="nav-number">1.</span> <span class="nav-text">1、什么是Hibernate的并发机制？怎么去处理并发问题？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、update和saveOrUpdate的区别？"><span class="nav-number">2.</span> <span class="nav-text">2、update和saveOrUpdate的区别？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、hibernate的三种状态之间如何转换"><span class="nav-number">3.</span> <span class="nav-text">3、hibernate的三种状态之间如何转换</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、比较hibernate的三种检索策略优缺点"><span class="nav-number">4.</span> <span class="nav-text">4、比较hibernate的三种检索策略优缺点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5、如何在控制台看到hibernate生成并执行的sql"><span class="nav-number">5.</span> <span class="nav-text">5、如何在控制台看到hibernate生成并执行的sql</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6、hibernate都支持哪些缓存策略"><span class="nav-number">6.</span> <span class="nav-text">6、hibernate都支持哪些缓存策略</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7、hibernate里面的sorted-collection-和ordered-collection有什么区别"><span class="nav-number">7.</span> <span class="nav-text">7、hibernate里面的sorted collection 和ordered collection有什么区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8、Hibernate工作原理？"><span class="nav-number">8.</span> <span class="nav-text">8、Hibernate工作原理？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9、为什么要用Hibernate"><span class="nav-number">9.</span> <span class="nav-text">9、为什么要用Hibernate</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10、Hibernate是如何延迟加载"><span class="nav-number">10.</span> <span class="nav-text">10、Hibernate是如何延迟加载?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#11、Hibernate中怎样实现类之间的关系-如：一对多、多对多的关系"><span class="nav-number">11.</span> <span class="nav-text">11、Hibernate中怎样实现类之间的关系?(如：一对多、多对多的关系)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#12、说下Hibernate的缓存机制"><span class="nav-number">12.</span> <span class="nav-text">12、说下Hibernate的缓存机制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#13、Hibernate的查询方式"><span class="nav-number">13.</span> <span class="nav-text">13、Hibernate的查询方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#14、如何优化Hibernate？"><span class="nav-number">14.</span> <span class="nav-text">14、如何优化Hibernate？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#15、Hibernate有哪几种查询数据的方式"><span class="nav-number">15.</span> <span class="nav-text">15、Hibernate有哪几种查询数据的方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#16、谈谈Hibernate中inverse的作用"><span class="nav-number">16.</span> <span class="nav-text">16、谈谈Hibernate中inverse的作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#17、Detached-Object（游离对象）有什么好处"><span class="nav-number">17.</span> <span class="nav-text">17、Detached Object（游离对象）有什么好处</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#18、JDBC-hibernate-和-ibatis-的区别"><span class="nav-number">18.</span> <span class="nav-text">18、JDBC hibernate 和 ibatis 的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#19、在数据库中条件查询速度很慢的时候-如何优化"><span class="nav-number">19.</span> <span class="nav-text">19、在数据库中条件查询速度很慢的时候,如何优化?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#20、什么是SessionFactory-她是线程安全么？"><span class="nav-number">20.</span> <span class="nav-text">20、什么是SessionFactory,她是线程安全么？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#21、Hibernate的五个核心接口"><span class="nav-number">21.</span> <span class="nav-text">21、Hibernate的五个核心接口</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">董能宇</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
