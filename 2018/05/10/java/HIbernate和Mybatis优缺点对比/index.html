@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="java," />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="#1234567891011121314151617181920212223242526272829303132package com.dongnengyu.mybatis_test2.service;/** * 董能宇 (dongnengyu@gmail.com) * 2018/3/25 */import org.apache.commons.beanutils.PropertyUtilsBea">
+<meta name="description" content="HIbernate和Mybatis优缺点对比Hibernate的优点：1、hibernate是全自动，hibernate完全可以通过对象关系模型实现对数据库的操作，拥有完整的JavaBean对象与数据库的映射结构来自动生成sql。 2、功能强大，数据库无关性好，O/R映射能力强，需要写的代码很少，开发速度很快。 3、有更好的二级缓存机制，可以使用第三方缓存。 4、数据库移植性良好。 5、hiber">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="做只猫">
-<meta property="og:url" content="http://yoursite.com/blog/2018/05/05/java/将JAVABEAN对象转化成MAP/index.html">
+<meta property="og:title" content="HIbernate和Mybatis优缺点对比">
+<meta property="og:url" content="http://yoursite.com/blog/2018/05/10/java/HIbernate和Mybatis优缺点对比/index.html">
 <meta property="og:site_name" content="做只猫">
-<meta property="og:description" content="#1234567891011121314151617181920212223242526272829303132package com.dongnengyu.mybatis_test2.service;/** * 董能宇 (dongnengyu@gmail.com) * 2018/3/25 */import org.apache.commons.beanutils.PropertyUtilsBea">
+<meta property="og:description" content="HIbernate和Mybatis优缺点对比Hibernate的优点：1、hibernate是全自动，hibernate完全可以通过对象关系模型实现对数据库的操作，拥有完整的JavaBean对象与数据库的映射结构来自动生成sql。 2、功能强大，数据库无关性好，O/R映射能力强，需要写的代码很少，开发速度很快。 3、有更好的二级缓存机制，可以使用第三方缓存。 4、数据库移植性良好。 5、hiber">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-05T04:56:30.000Z">
+<meta property="og:updated_time" content="2018-05-10T15:53:07.657Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="做只猫">
-<meta name="twitter:description" content="#1234567891011121314151617181920212223242526272829303132package com.dongnengyu.mybatis_test2.service;/** * 董能宇 (dongnengyu@gmail.com) * 2018/3/25 */import org.apache.commons.beanutils.PropertyUtilsBea">
+<meta name="twitter:title" content="HIbernate和Mybatis优缺点对比">
+<meta name="twitter:description" content="HIbernate和Mybatis优缺点对比Hibernate的优点：1、hibernate是全自动，hibernate完全可以通过对象关系模型实现对数据库的操作，拥有完整的JavaBean对象与数据库的映射结构来自动生成sql。 2、功能强大，数据库无关性好，O/R映射能力强，需要写的代码很少，开发速度很快。 3、有更好的二级缓存机制，可以使用第三方缓存。 4、数据库移植性良好。 5、hiber">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/blog/2018/05/05/java/将JAVABEAN对象转化成MAP/"/>
+  <link rel="canonical" href="http://yoursite.com/blog/2018/05/10/java/HIbernate和Mybatis优缺点对比/"/>
 
 
 
 
 
-  <title> | 做只猫</title>
+  <title>HIbernate和Mybatis优缺点对比 | 做只猫</title>
   
 
 
@@ -272,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/blog/blog/2018/05/05/java/将JAVABEAN对象转化成MAP/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/blog/blog/2018/05/10/java/HIbernate和Mybatis优缺点对比/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="董能宇">
@@ -289,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">HIbernate和Mybatis优缺点对比</h1>
         
 
         <div class="post-meta">
@@ -301,8 +302,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-05T12:56:30+08:00">
-                2018-05-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-10T21:36:36+08:00">
+                2018-05-10
               </time>
             
 
@@ -317,8 +318,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-05-05T12:56:30+08:00">
-                2018-05-05
+              <time title="更新于" itemprop="dateModified" datetime="2018-05-10T23:53:07+08:00">
+                2018-05-10
               </time>
             
           </span>
@@ -382,7 +383,28 @@
       
 
       
-        <p>#<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dongnengyu.mybatis_test2.service;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 董能宇 (dongnengyu@gmail.com)</span></span><br><span class="line"><span class="comment"> * 2018/3/25</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.beanutils.PropertyUtilsBean;</span><br><span class="line"><span class="keyword">import</span> java.beans.PropertyDescriptor;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaBeanUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//将javaBean对象转化成Map</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title">beanToMap</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">        Map&lt;String, Object&gt; params = <span class="keyword">new</span> HashMap&lt;String, Object&gt;(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            PropertyUtilsBean propertyUtilsBean = <span class="keyword">new</span> PropertyUtilsBean();</span><br><span class="line">            PropertyDescriptor[] descriptors = propertyUtilsBean.getPropertyDescriptors(obj);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; descriptors.length; i++) &#123;</span><br><span class="line">                String name = descriptors[i].getName();</span><br><span class="line">                <span class="keyword">if</span> (!<span class="string">"class"</span>.equals(name)) &#123;</span><br><span class="line">                    params.put(name, propertyUtilsBean.getNestedProperty(obj, name));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> params;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <h1 id="HIbernate和Mybatis优缺点对比"><a href="#HIbernate和Mybatis优缺点对比" class="headerlink" title="HIbernate和Mybatis优缺点对比"></a>HIbernate和Mybatis优缺点对比</h1><h4 id="Hibernate的优点："><a href="#Hibernate的优点：" class="headerlink" title="Hibernate的优点："></a>Hibernate的优点：</h4><p>1、hibernate是全自动，hibernate完全可以通过对象关系模型实现对数据库的操作，拥有完整的JavaBean对象与数据库的映射结构来自动生成sql。</p>
+<p>2、功能强大，数据库无关性好，O/R映射能力强，需要写的代码很少，开发速度很快。</p>
+<p>3、有更好的二级缓存机制，可以使用第三方缓存。</p>
+<p>4、数据库移植性良好。</p>
+<p>5、hibernate拥有完整的日志系统，hibernate日志系统非常健全，涉及广泛，包括sql记录、关系异常、优化警告、缓存提示、脏数据警告等</p>
+<h4 id="Hibernate的缺点："><a href="#Hibernate的缺点：" class="headerlink" title="Hibernate的缺点："></a>Hibernate的缺点：</h4><p>1、学习门槛高，精通门槛更高，程序员如何设计O/R映射，在性能和对象模型之间如何取得平衡，以及怎样用好Hibernate方面需要的经验和能力都很强才行</p>
+<p>2、hibernate的sql很多都是自动生成的，无法直接维护sql；虽然有hql查询，但功能还是不及sql强大，见到报表等变态需求时，hql查询要虚，也就是说hql查询是有局限的；hibernate虽然也支持原生sql查询，但开发模式上却与orm不同，需要转换思维，因此使用上有些不方便。总之写sql的灵活度上hibernate不及mybatis。</p>
+<h4 id="Mybatis的优点："><a href="#Mybatis的优点：" class="headerlink" title="Mybatis的优点："></a>Mybatis的优点：</h4><p>1、易于上手和掌握，提供了数据库查询的自动对象绑定功能，而且延续了很好的SQL使用经验，对于没有那么高的对象模型要求的项目来说，相当完美。</p>
+<p>2、sql写在xml里，便于统一管理和优化， 解除sql与程序代码的耦合。</p>
+<p>3、提供映射标签，支持对象与数据库的orm字段关系映射</p>
+<p>4、 提供对象关系映射标签，支持对象关系组建维护</p>
+<p>5、提供xml标签，支持编写动态sql。</p>
+<p>6、速度相对于Hibernate的速度较快</p>
+<h4 id="Mybatis的缺点："><a href="#Mybatis的缺点：" class="headerlink" title="Mybatis的缺点："></a>Mybatis的缺点：</h4><p>1、关联表多时，字段多的时候，sql工作量很大。</p>
+<p>2、sql依赖于数据库，导致数据库移植性差。</p>
+<p>3、由于xml里标签id必须唯一，导致DAO中方法不支持方法重载。</p>
+<p>4、对象关系映射标签和字段映射标签仅仅是对映射关系的描述，具体实现仍然依赖于sql。</p>
+<p>5、DAO层过于简单，对象组装的工作量较大。</p>
+<p>6、不支持级联更新、级联删除。</p>
+<p>7、Mybatis的日志除了基本记录功能外，其它功能薄弱很多。</p>
+<p>8、编写动态sql时,不方便调试，尤其逻辑复杂时。</p>
+<p>9、提供的写动态sql的xml标签功能简单，编写动态sql仍然受限，且可读性低。</p>
 
       
     </div>
@@ -398,6 +420,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/blog/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
 
       
       
@@ -407,8 +435,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2018/05/05/java/HIbernate和Mybatis优缺点对比/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/blog/2018/05/10/java/List、Map、Set区别/" rel="next" title="List、Map、Set区别">
+                <i class="fa fa-chevron-left"></i> List、Map、Set区别
               </a>
             
           </div>
@@ -417,8 +445,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2018/05/06/解释型语言和编译型语言的区别/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/blog/2018/05/10/MWeb/Markdown嵌入图片/" rel="prev" title="Markdown嵌入图片">
+                Markdown嵌入图片 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -471,8 +499,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -491,7 +528,7 @@
               
                 <a href="/blog/archives/">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -504,7 +541,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/blog/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -527,6 +564,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HIbernate和Mybatis优缺点对比"><span class="nav-number">1.</span> <span class="nav-text">HIbernate和Mybatis优缺点对比</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hibernate的优点："><span class="nav-number">1.0.0.1.</span> <span class="nav-text">Hibernate的优点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hibernate的缺点："><span class="nav-number">1.0.0.2.</span> <span class="nav-text">Hibernate的缺点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mybatis的优点："><span class="nav-number">1.0.0.3.</span> <span class="nav-text">Mybatis的优点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mybatis的缺点："><span class="nav-number">1.0.0.4.</span> <span class="nav-text">Mybatis的缺点：</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
