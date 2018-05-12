@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="1、什么是Hibernate的并发机制？怎么去处理并发问题？Hibernate并发机制： a、Hibernate的Session对象是非线程安全的,对于单个请求,单个会话,单个的工作单元(即单个事务,单个线程),它通常只使用一次, 然后就丢弃。 123如果一个Session 实例允许共享的话，那些支持并发运行的,例如Http request,session beans将会导致出现资源争用。 如果在">
+<meta name="description" content="1、什么是Hibernate的并发机制？怎么去处理并发问题？Hibernate并发机制： a、Hibernate的Session对象是非线程安全的,对于单个请求,单个会话,单个的工作单元(即单个事务,单个线程),它通常只使用一次, 然后就丢弃。 12345如果一个Session 实例允许共享的话，那些支持并发运行的,例如Http request,session beans将会导致出现资源争用。 如">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HIbernate框架面试题">
 <meta property="og:url" content="http://yoursite.com/blog/2018/05/10/java/HIbernate框架面试题/index.html">
 <meta property="og:site_name" content="做只猫">
-<meta property="og:description" content="1、什么是Hibernate的并发机制？怎么去处理并发问题？Hibernate并发机制： a、Hibernate的Session对象是非线程安全的,对于单个请求,单个会话,单个的工作单元(即单个事务,单个线程),它通常只使用一次, 然后就丢弃。 123如果一个Session 实例允许共享的话，那些支持并发运行的,例如Http request,session beans将会导致出现资源争用。 如果在">
+<meta property="og:description" content="1、什么是Hibernate的并发机制？怎么去处理并发问题？Hibernate并发机制： a、Hibernate的Session对象是非线程安全的,对于单个请求,单个会话,单个的工作单元(即单个事务,单个线程),它通常只使用一次, 然后就丢弃。 12345如果一个Session 实例允许共享的话，那些支持并发运行的,例如Http request,session beans将会导致出现资源争用。 如">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-10T15:53:33.755Z">
+<meta property="og:updated_time" content="2018-05-12T08:40:13.524Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HIbernate框架面试题">
-<meta name="twitter:description" content="1、什么是Hibernate的并发机制？怎么去处理并发问题？Hibernate并发机制： a、Hibernate的Session对象是非线程安全的,对于单个请求,单个会话,单个的工作单元(即单个事务,单个线程),它通常只使用一次, 然后就丢弃。 123如果一个Session 实例允许共享的话，那些支持并发运行的,例如Http request,session beans将会导致出现资源争用。 如果在">
+<meta name="twitter:description" content="1、什么是Hibernate的并发机制？怎么去处理并发问题？Hibernate并发机制： a、Hibernate的Session对象是非线程安全的,对于单个请求,单个会话,单个的工作单元(即单个事务,单个线程),它通常只使用一次, 然后就丢弃。 12345如果一个Session 实例允许共享的话，那些支持并发运行的,例如Http request,session beans将会导致出现资源争用。 如">
 
 
 
@@ -318,8 +318,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-05-10T23:53:33+08:00">
-                2018-05-10
+              <time title="更新于" itemprop="dateModified" datetime="2018-05-12T16:40:13+08:00">
+                2018-05-12
               </time>
             
           </span>
@@ -385,7 +385,7 @@
       
         <h5 id="1、什么是Hibernate的并发机制？怎么去处理并发问题？"><a href="#1、什么是Hibernate的并发机制？怎么去处理并发问题？" class="headerlink" title="1、什么是Hibernate的并发机制？怎么去处理并发问题？"></a>1、什么是Hibernate的并发机制？怎么去处理并发问题？</h5><p>Hibernate并发机制：</p>
 <p>a、Hibernate的Session对象是非线程安全的,对于单个请求,单个会话,单个的工作单元(即单个事务,单个线程),它通常只使用一次, 然后就丢弃。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">如果一个Session 实例允许共享的话，那些支持并发运行的,例如Http request,session beans将会导致出现资源争用。 </span><br><span class="line"></span><br><span class="line">如果在Http Session中有hibernate的Session的话,就可能会出现同步访问Http Session。只要用户足够快的点击浏览器的“刷新”,  就会导致两个并发运行的线程使用同一个Session。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">如果一个Session 实例允许共享的话，那些支持并发运行的,</span><br><span class="line">例如Http request,session beans将会导致出现资源争用。 </span><br><span class="line"></span><br><span class="line">如果在Http Session中有hibernate的Session的话,就可能会出现同步访问Http Session。</span><br><span class="line">只要用户足够快的点击浏览器的“刷新”,  就会导致两个并发运行的线程使用同一个Session。</span><br></pre></td></tr></table></figure>
 <p>b、多个事务并发访问同一块资源,可能会引发第一类丢失更新，脏读，幻读，不可重复读，第二类丢失更新一系列的问题。</p>
 <p>解决方案：设置事务隔离级别。<br>Serializable：串行化。隔离级别最高<br>Repeatable Read：可重复读<br>Read Committed：已提交数据读<br>Read Uncommitted：未提交数据读。隔离级别最差<br>设置锁：乐观锁和悲观锁。<br>乐观锁：使用版本号或时间戳来检测更新丢失,在的映射中设置 optimistic-lock=”all”可以在没有版本或者时间戳属性映射的情况下实现 版本检查，此时Hibernate将比较一行记录的每个字段的状态 行级悲观锁：Hibernate总是使用数据库的锁定机制，从不在内存中锁定对象！只要为JDBC连接指定一下隔 离级别，然后让数据库去搞定一切就够了。类LockMode 定义了Hibernate所需的不同的锁定级别：LockMode.UPGRADE,LockMode.UPGRADE_NOWAIT,LockMode.READ;</p>
 <h5 id="2、update和saveOrUpdate的区别？"><a href="#2、update和saveOrUpdate的区别？" class="headerlink" title="2、update和saveOrUpdate的区别？"></a>2、update和saveOrUpdate的区别？</h5><p>update()和saveOrUpdate()是用来对跨Session的PO进行状态管理的。<br>update()方法操作的对象必须是持久化了的对象。也就是说，如果此对象在数据库中不存在的话，就不能使用update()方法。<br>saveOrUpdate()方法操作的对象既可以使持久化了的，也可以使没有持久化的对象。如果是持久化了的对象调用saveOrUpdate()则会 更新数据库中的对象；如果是未持久化的对象使用此方法,则save到数据库中。</p>
@@ -453,8 +453,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2018/05/10/数据库/sql语句中的Count()/" rel="next" title="sql语句中的Count()">
-                <i class="fa fa-chevron-left"></i> sql语句中的Count()
+              <a href="/blog/2018/05/10/java/将JAVABEAN对象转化成MAP/" rel="next" title="将JAVABEAN对象转化成MAP">
+                <i class="fa fa-chevron-left"></i> 将JAVABEAN对象转化成MAP
               </a>
             
           </div>
@@ -463,8 +463,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2018/05/10/数据库/数据库三种完整性/" rel="prev" title="数据库三种完整性">
-                数据库三种完整性 <i class="fa fa-chevron-right"></i>
+              <a href="/blog/2018/05/10/操作系统/关于跨平台的认识/" rel="prev" title="关于跨平台的认识">
+                关于跨平台的认识 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
