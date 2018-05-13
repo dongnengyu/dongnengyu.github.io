@@ -328,6 +328,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/11/java/java开源持久层框架/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/05/11/java/java开源持久层框架/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -414,8 +424,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/11/java/序列化和持久化的区别与联系/" rel="next" title="序列化和持久化的区别与联系">
-                <i class="fa fa-chevron-left"></i> 序列化和持久化的区别与联系
+              <a href="/2018/05/10/java/HIbernate框架面试题/" rel="next" title="HIbernate框架面试题">
+                <i class="fa fa-chevron-left"></i> HIbernate框架面试题
               </a>
             
           </div>
@@ -423,6 +433,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/11/java/序列化和持久化的区别与联系/" rel="prev" title="序列化和持久化的区别与联系">
+                序列化和持久化的区别与联系 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -754,8 +768,8 @@
 <!-- LOCAL: You can save these files to your site and update links -->
     
         
-        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
     
 <!-- END LOCAL -->
 
@@ -764,10 +778,12 @@
     
       <script type="text/javascript">
       function renderGitment(){
-        var gitment = new Gitment({
+        var gitment = new Gitmint({
             id: window.location.pathname, 
             owner: 'dongnengyu',
             repo: 'blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
             
             oauth: {
             

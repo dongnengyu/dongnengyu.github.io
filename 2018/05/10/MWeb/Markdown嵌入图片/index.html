@@ -328,6 +328,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/10/MWeb/Markdown嵌入图片/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/05/10/MWeb/Markdown嵌入图片/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -426,8 +436,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/10/乐评/十个救火的少年/" rel="next" title="十个救火的少年">
-                <i class="fa fa-chevron-left"></i> 十个救火的少年
+              <a href="/2018/05/07/静态代码/" rel="next" title="静态代码">
+                <i class="fa fa-chevron-left"></i> 静态代码
               </a>
             
           </div>
@@ -436,8 +446,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/10/影评/舌尖上的中国3影评/" rel="prev" title="舌尖上的中国3影评">
-                舌尖上的中国3影评 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/10/java/HIbernate和Mybatis优缺点对比/" rel="prev" title="HIbernate和Mybatis优缺点对比">
+                HIbernate和Mybatis优缺点对比 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -770,8 +780,8 @@
 <!-- LOCAL: You can save these files to your site and update links -->
     
         
-        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
     
 <!-- END LOCAL -->
 
@@ -780,10 +790,12 @@
     
       <script type="text/javascript">
       function renderGitment(){
-        var gitment = new Gitment({
+        var gitment = new Gitmint({
             id: window.location.pathname, 
             owner: 'dongnengyu',
             repo: 'blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
             
             oauth: {
             

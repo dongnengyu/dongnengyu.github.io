@@ -328,6 +328,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/10/乐评/十个救火的少年/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/05/10/乐评/十个救火的少年/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -419,8 +429,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/10/乐评/樱花树下/" rel="next" title="如有天置地门外，乘电车跨国大海 --《樱花树下》">
-                <i class="fa fa-chevron-left"></i> 如有天置地门外，乘电车跨国大海 --《樱花树下》
+              <a href="/2018/05/10/java/将JAVABEAN对象转化成MAP/" rel="next" title="将JAVABEAN对象转化成MAP">
+                <i class="fa fa-chevron-left"></i> 将JAVABEAN对象转化成MAP
               </a>
             
           </div>
@@ -429,8 +439,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/10/MWeb/Markdown嵌入图片/" rel="prev" title="Markdown嵌入图片">
-                Markdown嵌入图片 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/10/数据库/sql语句中的Count()/" rel="prev" title="sql语句中的Count()">
+                sql语句中的Count() <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -763,8 +773,8 @@
 <!-- LOCAL: You can save these files to your site and update links -->
     
         
-        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
     
 <!-- END LOCAL -->
 
@@ -773,10 +783,12 @@
     
       <script type="text/javascript">
       function renderGitment(){
-        var gitment = new Gitment({
+        var gitment = new Gitmint({
             id: window.location.pathname, 
             owner: 'dongnengyu',
             repo: 'blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
             
             oauth: {
             
